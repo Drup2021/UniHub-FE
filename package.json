@@ -26,6 +26,8 @@
     "framer-motion": "^12.4.3",
     "html-react-parser": "^5.2.2",
     "input-otp": "^1.4.1",
+    "leaflet": "^1.9.4",
+    "leaflet-routing-machine": "^3.2.12",
     "lucide-react": "^0.468.0",
     "motion": "^11.13.1",
     "react": "^18.3.1",
