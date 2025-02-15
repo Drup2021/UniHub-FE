@@ -1,4 +1,4 @@
-import { motion } from "motion/react";
+import { motion } from "framer-motion";
 import { useState } from "react";
 
 const Input = ({ color1, color2, duration = 4, children, className = "" }) => {

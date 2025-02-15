@@ -1,6 +1,6 @@
 import { useState } from "react";
 import Input from "../../components/Input/Input";
-import { motion } from "motion/react";
+import { motion } from "framer-motion";
 import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { useDispatch, useSelector } from "react-redux";

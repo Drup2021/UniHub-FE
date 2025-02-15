@@ -1,7 +1,7 @@
 import { ToastContainer } from "react-toastify";
 import StackOverflow from "../../components/StackOverflow";
-import AddQuestion from "../../components/AddQuestion";
-import ViewQuestion from "@/components/ViewQuestion";
+import AddQuestion from "../../components/AddQuestion/AddQuestion";
+import ViewQuestion from "@/components/ViewQuestion/ViewQuestion";
 
 const Forum = () => {
   return (

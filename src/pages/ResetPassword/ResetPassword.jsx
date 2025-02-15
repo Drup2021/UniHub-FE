@@ -1,5 +1,5 @@
 import { toast, ToastContainer } from "react-toastify";
-import { motion } from "motion/react";
+import { motion } from "framer-motion";
 import { useState } from "react";
 import Spinner from "../../components/Spinner/Spinner";
 import Input from "../../components/Input/Input";
