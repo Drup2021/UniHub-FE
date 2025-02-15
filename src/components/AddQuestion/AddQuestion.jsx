@@ -74,9 +74,9 @@ const AddQuestion = () => {
       formData.append("user", user);
   
       // Append the single image to the formData
-      if (image) {
-        formData.append("image", image); // Use "image" instead of "images"
-      }
+    //if (image) {
+      //   formData.append("image", image); // Use "image" instead of "images"
+      // }
   
       // Log the title, body, and tags
       console.log("Title:", title);
@@ -84,11 +84,11 @@ const AddQuestion = () => {
       console.log("Tags:", tag);
   
       // Log a confirmation message for the image
-      if (image) {
-        console.log("Image added successfully");
-      } else {
-        console.log("No image added");
-      }
+      // if (image) {
+      //   console.log("Image added successfully");
+      // } else {
+      //   console.log("No image added");
+      // }
   
       try {
         await axios.post("/api/question", formData, {
@@ -160,7 +160,7 @@ const AddQuestion = () => {
           </small>
         </div>
 
-        <div className="bg-gray-800 rounded-2xl p-6 mb-5 shadow-lg">
+        {/* <div className="bg-gray-800 rounded-2xl p-6 mb-5 shadow-lg">
            <label className="block text-lg font-semibold text-pri mb-2">
               Upload Image
             </label>
@@ -173,7 +173,7 @@ const AddQuestion = () => {
         <small className="text-sm text-gray-400 mt-2">
           You can upload only one image.
         </small>
-        </div>
+        </div> */}
 
         {/* Tags Input */}
         <div className="bg-gray-800 rounded-2xl p-5 mb-2 shadow-lg">
