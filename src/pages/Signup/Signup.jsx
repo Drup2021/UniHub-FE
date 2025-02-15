@@ -123,7 +123,7 @@ const Signup = () => {
         initial={{ opacity: 0, y: 30 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 1 }}
-        className="rounded-xl md:w-[50dvw] flex flex-col md:flex-row md:justify-between p-4 md:p-8 bg-back border border-border shadow-xl"
+        className="rounded-xl md:w-[70dvw] flex flex-col md:flex-row md:justify-between p-4 md:p-8 bg-back border border-border shadow-xl"
       >
         <div className="text-2xl text-heading font-bold uppercase text-center mb-4">
           Sign up
