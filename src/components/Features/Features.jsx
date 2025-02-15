@@ -6,6 +6,7 @@ const Features = ({ setPosition }) => {
   const [isOpen, setIsOpen] = useState(false);
 
   const routes = [
+    { label: "chatbot", to: "/chatbot" },
     { label: "forum", to: "/forum" },
     { label: "events", to: "/events" },
     { label: "maps", to: "/maps" },
