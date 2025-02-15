@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import viteLogo from '/vite.svg'
 import ChatBot from './pages/Chatbot/Chatbot'
+import LandingPage from './pages/LandingPage/LandingPage'
 // import './App.css'
 
 function App() {
@@ -8,7 +9,8 @@ function App() {
   //   <h1 class="text-3xl font-bold underline">
   //   Testing!
   // </h1>
-  <ChatBot/>
+  // <ChatBot/>
+  <LandingPage/>
   )
 }
 
