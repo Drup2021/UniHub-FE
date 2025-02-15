@@ -1,31 +1,35 @@
-import React, { useState, useEffect } from 'react';
+/* eslint-disable react/prop-types */
+import { useState, useEffect } from "react";
+
+import metallum from "@/assets/metallum.jpg";
+import revelation from "@/assets/revelation.jpg";
+import wolfame from "@/assets/wolfame2.jpg";
 
 const eventsData = [
   {
     id: 1,
-    img: "./metallum.jpg",
+    img: metallum,
     title: "Metallum",
     desc: "Metallum is the annual tech fest of the Society of Student Metallurgists, IIEST Shibpur",
     date: "2025-02-13 to 2025-02-15",
-    url: "https://metallum.co.in/"
+    url: "https://metallum.co.in/",
   },
   {
     id: 2,
-    img: "./revelation.jpg",
+    img: revelation,
     title: "Revelation",
     desc: "Revelation is the annual tech fest of ASCE, IIEST Shibpur, featuring competitions",
     date: "2025-03-23 to 2025-03-25",
-    url: "https://unstop.com/college-fests/revelation-24-indian-institute-of-engineering-science-and-technology-iiest-shibpur-234957"
+    url: "https://unstop.com/college-fests/revelation-24-indian-institute-of-engineering-science-and-technology-iiest-shibpur-234957",
   },
   {
     id: 3,
-    img: "./wolfame2.jpg",
+    img: wolfame,
     title: "Wolfame",
     desc: "Wolfame is the annual sports and cultural fest of Wolfenden Hall, IIEST Shibpur",
     date: "2025-03-17 to 2025-03-19",
-    url: "https://wolfame.in/"
-  }
-  // ... add more events as needed
+    url: "https://wolfame.in/",
+  },
 ];
 
 const shareEventDetails = (title, date, desc, url) => {
@@ -48,9 +52,7 @@ Looking forward to your thoughts. Let me know if you're interested!`;
 };
 
 const EventCard = ({ event }) => (
-  <div
-    className="event group relative bg-gray-800 rounded-lg overflow-hidden transition-transform duration-300 transform opacity-0 translate-y-5"
-  >
+  <div className="event group relative bg-gray-800 rounded-lg overflow-hidden transition-transform duration-300 transform opacity-0 translate-y-5">
     {/* Event Image */}
     <img
       src={event.img}
@@ -80,7 +82,9 @@ const EventCard = ({ event }) => (
           Details
         </button>
         <button
-          onClick={() => shareEventDetails(event.title, event.date, event.desc, event.url)}
+          onClick={() =>
+            shareEventDetails(event.title, event.date, event.desc, event.url)
+          }
           className="px-4 py-2 bg-purple-600 rounded-full text-white hover:bg-purple-700 transition-colors duration-300"
         >
           Share
@@ -100,13 +104,13 @@ const EventsGallery = () => {
 
   // Re-run the observer setup every time the filtered events change.
   useEffect(() => {
-    const lazyEvents = document.querySelectorAll('.event');
+    const lazyEvents = document.querySelectorAll(".event");
     const observer = new IntersectionObserver(
       (entries, obs) => {
         entries.forEach((entry) => {
           if (entry.isIntersecting) {
-            entry.target.classList.remove('opacity-0', 'translate-y-5');
-            entry.target.classList.add('opacity-100', 'translate-y-0');
+            entry.target.classList.remove("opacity-0", "translate-y-5");
+            entry.target.classList.add("opacity-100", "translate-y-0");
             obs.unobserve(entry.target);
           }
         });
