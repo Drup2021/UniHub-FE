@@ -11,4 +11,13 @@ export default defineConfig({
       "@": path.resolve(__dirname, "./src"),
     },
   },
+  server: {
+    proxy: {
+      '/ask': {
+        target: 'https://blakebot-1.onrender.com',
+        changeOrigin: true,
+        secure: false,
+      },
+    },
+  },
 });
