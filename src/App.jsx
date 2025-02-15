@@ -19,6 +19,10 @@ import Loading from "./pages/Loading/Loading";
 import Home from "./pages/Home/Home";
 import Forum from "./pages/Forum/Forum";
 import Profile from "./pages/Profile/Profile";
+import AddQuestion from "./components/AddQuestion/AddQuestion";
+import ChatBot from "./pages/Chatbot/Chatbot";
+import EventsGallery from "./components/Events/Events";
+import ViewQuestion from "./components/ViewQuestion/ViewQuestion";
 
 const App = () => {
   const { scrollY } = useScroll();
@@ -51,31 +55,27 @@ const App = () => {
       <Navbar />
       <Routes>
         <Route index element={<Home />}></Route>
+        <Route path="/login" element={<Login />}></Route>
+        <Route path="/signup" element={<Signup />}></Route>
+        <Route path="/forgotPassword" element={<ForgotPassword />}></Route>
+        <Route path="/resetPassword/:token" element={<ResetPassword />}></Route>
 
         {!user?.isVerified && (
           <Route path="/verifyEmail" element={<VerifyEmail />}></Route>
         )}
 
-        {isAuthenticated ? (
+        {isAuthenticated && (
           <>
             <Route path="/profile" element={<Profile />}></Route>
             <Route path="/forum" element={<Forum />}></Route>
             <Route path="/deleteAccount" element={<DeleteAccount />}></Route>
-          </>
-        ) : (
-          <>
-            {" "}
-            <Route path="/login" element={<Login />}></Route>
-            <Route path="/signup" element={<Signup />}></Route>
-            <Route path="/forgotPassword" element={<ForgotPassword />}></Route>
-            <Route
-              path="/resetPassword/:token"
-              element={<ResetPassword />}
-            ></Route>
-            <Route path="/loading" element={<Loading />}></Route>
+            <Route path="/add-question" element={<AddQuestion />}></Route>
+            <Route path="/chatbot" element={<ChatBot />}></Route>
+            <Route path="/events" element={<EventsGallery />}></Route>
+            <Route path="/question" element={<ViewQuestion />}></Route>
           </>
         )}
-
+        <Route path="/loading" element={<Loading />}></Route>
         <Route path="*" element={<Error404 />}></Route>
       </Routes>
     </motion.div>

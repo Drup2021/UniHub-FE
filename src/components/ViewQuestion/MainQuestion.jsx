@@ -9,6 +9,7 @@ import { Link } from "react-router-dom";
 import { useSelector } from "react-redux";
 
 function MainQuestion() {
+  // Editor toolbar configuration
   const toolbarOptions = [
     ["bold", "italic", "underline", "strike"],
     ["blockquote", "code-block"],
@@ -51,11 +52,12 @@ function MainQuestion() {
     ],
   };
 
+  // Extract the question ID from the URL query string.
   const search = window.location.search;
   const params = new URLSearchParams(search);
   const id = params.get("q");
 
-  const [questionData, setQuestionData] = useState();
+  const [questionData, setQuestionData] = useState(null);
   const [answer, setAnswer] = useState("");
   const [show, setShow] = useState(false);
   const [comment, setComment] = useState("");
@@ -63,35 +65,47 @@ function MainQuestion() {
 
   const handleQuill = (value) => setAnswer(value);
 
+  // Fetch question details from the API
   useEffect(() => {
     async function getFunctionDetails() {
       try {
-        const res = await axios.get(`/api/question/${id}`);
-        setQuestionData(res.data[0]);
+        const res = await axios.get(
+          `http://localhost:3000/api/forum/question/${id}`
+        );
+        // If the API returns an array, use its first element; otherwise, use the object.
+        const question = Array.isArray(res.data) ? res.data[0] : res.data;
+        setQuestionData(question);
+        console.log("Question Data:", question);
       } catch (err) {
         console.error(err);
       }
     }
-    getFunctionDetails();
+    if (id) {
+      getFunctionDetails();
+    }
   }, [id]);
 
+  // Refresh the question data (e.g. after adding an answer or comment)
   async function getUpdatedAnswer() {
     try {
-      const res = await axios.get(`/api/question/${id}`);
-      setQuestionData(res.data[0]);
+      const res = await axios.get(
+        `http://localhost:3000/api/forum/question/${id}`
+      );
+      const question = Array.isArray(res.data) ? res.data[0] : res.data;
+      setQuestionData(question);
     } catch (err) {
       console.error(err);
     }
   }
 
+  // Submit a new answer
   const handleSubmit = async () => {
     console.log("Answer Submitted:", answer);
-
     const body = { question_id: id, answer, user };
     const config = { headers: { "Content-Type": "application/json" } };
 
     try {
-      await axios.post("/api/answer", body, config);
+      await axios.post("http://localhost:3000/api/forum/answer", body, config);
       alert("Answer added successfully");
       setAnswer("");
       getUpdatedAnswer();
@@ -100,13 +114,13 @@ function MainQuestion() {
     }
   };
 
+  // Submit a new comment
   const handleComment = async () => {
     console.log("Comment Submitted:", comment);
-
     if (comment.trim()) {
       const body = { question_id: id, comment, user };
       try {
-        await axios.post(`/api/comment/${id}`, body);
+        await axios.post(`http://localhost:3000/api/forum/comment/${id}`, body);
         setComment("");
         setShow(false);
         getUpdatedAnswer();
@@ -116,9 +130,17 @@ function MainQuestion() {
     }
   };
 
+  if (!questionData) {
+    return (
+      <div className="w-full min-h-screen bg-back flex items-center justify-center">
+        <p className="text-white">Loading...</p>
+      </div>
+    );
+  }
+
   return (
-    <div className="w-screen h-screen bg-gradient-to-br from-gray-900 to-gray-800 py-10">
-      <div className="max-w-3xl ml-72 pl-6">
+    <div className="w-full min-h-screen bg-back flex items-center justify-center py-10">
+      <div className="max-w-3xl w-full px-6">
         {/* Header */}
         <div className="flex justify-between items-center mb-8">
           <h2 className="text-3xl font-bold text-pri">
@@ -188,9 +210,7 @@ function MainQuestion() {
                       - {_qd.user?.displayName || "Anonymous"}
                     </span>
                     <small className="block">
-                      {new Date(
-                        _qd.created_at || Date.now()
-                      ).toLocaleString()}
+                      {new Date(_qd.created_at || Date.now()).toLocaleString()}
                     </small>
                   </p>
                 ))}
@@ -228,10 +248,7 @@ function MainQuestion() {
             {questionData?.answerDetails?.length || 0} Answers
           </p>
           {questionData?.answerDetails?.map((_q) => (
-            <div
-              key={_q._id}
-              className="flex border-b border-pri pb-6 mb-6"
-            >
+            <div key={_q._id} className="flex border-b border-pri pb-6 mb-6">
               <div className="flex flex-col items-center mr-4">
                 <button className="text-pri hover:text-pri-dark transition-colors">
                   ▲
@@ -244,9 +261,7 @@ function MainQuestion() {
                 <HistoryIcon className="text-pri mt-2 hover:text-pri-dark transition-colors" />
               </div>
               <div className="flex-1">
-                <div className="prose text-pri">
-                  {parse(_q.answer || "")}
-                </div>
+                <div className="prose text-pri">{parse(_q.answer || "")}</div>
                 <div className="text-sm text-gray-300 mt-4">
                   <small>
                     answered{" "}
@@ -265,9 +280,7 @@ function MainQuestion() {
 
         {/* Your Answer Section */}
         <div className="bg-gray-800 rounded-2xl p-6 shadow-lg">
-          <h3 className="text-2xl font-bold text-pri mb-6">
-            Your Answer
-          </h3>
+          <h3 className="text-2xl font-bold text-pri mb-6">Your Answer</h3>
           <div className="bg-gray-700 rounded-lg border border-pri">
             <ReactQuill
               value={answer}
@@ -286,35 +299,35 @@ function MainQuestion() {
           </button>
         </div>
 
-       {/* Custom CSS for Quill Icons (Unchanged) */}
-       <style>
+        {/* Custom CSS for ReactQuill */}
+        <style>
           {`
             .ql-toolbar.ql-snow {
-              border: 1px solid #6d28d9 !important; /* Purple border */
+              border: 1px solid #6d28d9 !important;
               border-radius: 8px 8px 0 0;
-              background-color: #374151; /* Gray-700 */
+              background-color: #374151;
             }
             .ql-container.ql-snow {
-              border: 1px solid #6d28d9 !important; /* Purple border */
+              border: 1px solid #6d28d9 !important;
               border-radius: 0 0 8px 8px;
-              background-color: #374151; /* Gray-700 */
+              background-color: #374151;
             }
             .ql-snow .ql-stroke {
-              stroke: #d8b4fe !important; /* Light purple for icons */
+              stroke: #d8b4fe !important;
             }
             .ql-snow .ql-fill {
-              fill: #d8b4fe !important; /* Light purple for icons */
+              fill: #d8b4fe !important;
             }
             .ql-snow .ql-picker {
-              color: #d8b4fe !important; /* Light purple for picker text */
+              color: #d8b4fe !important;
             }
             .ql-editor {
-              font-size: 1.125rem; /* text-lg */
-              color: #e9d5ff; /* Light purple for text */
+              font-size: 1.125rem;
+              color: #e9d5ff;
             }
             .ql-editor.ql-blank::before {
-              color: #9ca3af; /* Gray-400 for placeholder */
-              font-size: 1.125rem; /* text-lg */
+              color: #9ca3af;
+              font-size: 1.125rem;
               font-style: normal !important;
             }
           `}

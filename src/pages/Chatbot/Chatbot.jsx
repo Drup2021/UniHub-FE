@@ -1,7 +1,7 @@
-import React, { useState } from 'react';
+import { useState } from "react";
 
 const ChatBot = () => {
-  const [question, setQuestion] = useState('');
+  const [question, setQuestion] = useState("");
   const [messages, setMessages] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
 
@@ -10,44 +10,44 @@ const ChatBot = () => {
     if (!question.trim()) return;
 
     // Add the user's message to the conversation
-    setMessages((prev) => [...prev, { sender: 'user', text: question }]);
+    setMessages((prev) => [...prev, { sender: "user", text: question }]);
     setIsLoading(true);
 
     try {
-      console.log('Sending request with body:', { query: question });
-      const response = await fetch('/ask', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
+      console.log("Sending request with body:", { query: question });
+      const response = await fetch("/ask", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ query: question }),
       });
 
-      console.log('Response status:', response.status);
+      console.log("Response status:", response.status);
 
       if (response.status === 500) {
-        console.log('Received 500 error from API');
+        console.log("Received 500 error from API");
         // If a 500 error occurs, show the busy message
         setMessages((prev) => [
           ...prev,
-          { sender: 'bot', text: 'the LLM server is busy, try again.' },
+          { sender: "bot", text: "the LLM server is busy, try again." },
         ]);
       } else {
         const data = await response.json();
-        console.log('Response data:', data);
+        console.log("Response data:", data);
         setMessages((prev) => [
           ...prev,
-          { sender: 'bot', text: data.response },
+          { sender: "bot", text: data.response },
         ]);
       }
     } catch (error) {
-      console.error('Error:', error);
+      console.error("Error:", error);
       // For any error, also show the busy message
       setMessages((prev) => [
         ...prev,
-        { sender: 'bot', text: 'the LLM server is busy, try again.' },
+        { sender: "bot", text: "the LLM server is busy, try again." },
       ]);
     } finally {
       setIsLoading(false);
-      setQuestion('');
+      setQuestion("");
     }
   };
 
@@ -68,13 +68,15 @@ const ChatBot = () => {
           {messages.map((msg, index) => (
             <div
               key={index}
-              className={`flex ${msg.sender === 'user' ? 'justify-end' : 'justify-start'}`}
+              className={`flex ${
+                msg.sender === "user" ? "justify-end" : "justify-start"
+              }`}
             >
               <div
                 className={`px-4 py-2 rounded-lg ${
-                  msg.sender === 'user'
-                    ? 'bg-blue-600 text-white'
-                    : 'bg-gray-700 text-white'
+                  msg.sender === "user"
+                    ? "bg-blue-600 text-white"
+                    : "bg-gray-700 text-white"
                 }`}
               >
                 {msg.text}
@@ -96,7 +98,7 @@ const ChatBot = () => {
             disabled={isLoading}
             className="bg-pri text-white px-4 py-2 rounded-r-lg hover:bg-pink-400 disabled:opacity-50"
           >
-            {isLoading ? 'Sending...' : 'Send'}
+            {isLoading ? "Sending..." : "Send"}
           </button>
         </form>
       </div>
