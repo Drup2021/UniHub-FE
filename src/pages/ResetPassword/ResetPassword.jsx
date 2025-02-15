@@ -88,7 +88,7 @@ const ResetPassword = () => {
           className="flex flex-col gap-4 p-4 w-[80dvw] md:w-1/2"
           onSubmit={handleSubmit}
         >
-          <Input color1="#282829" color2="#4CAF50" className="rounded-xl p-px">
+          <Input color1="#1E1E1E" color2="#a075e6" className="rounded-xl p-px">
             <input
               type="password"
               placeholder="Password"
@@ -97,7 +97,7 @@ const ResetPassword = () => {
               className="rounded-xl focus:outline-none h-12 text-txt px-4 bg-back w-full"
             />
           </Input>
-          <Input color1="#282829" color2="#4CAF50" className="rounded-xl p-px">
+          <Input color1="#1E1E1E" color2="#a075e6" className="rounded-xl p-px">
             <input
               type="password"
               placeholder="Confirm Password"

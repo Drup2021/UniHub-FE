@@ -98,7 +98,7 @@ const Login = () => {
           className="flex flex-col gap-4 p-4 w-[80dvw] md:w-1/2"
           onSubmit={handleSubmitLogin}
         >
-          <Input color1="#282829" color2="#4CAF50" className="rounded-xl p-px">
+          <Input color1="#1E1E1E" color2="#a075e6" className="rounded-xl p-px">
             <input
               type="email"
               placeholder="Email"
@@ -109,7 +109,7 @@ const Login = () => {
               name="email"
             />
           </Input>
-          <Input color1="#282829" color2="#4CAF50" className="rounded-xl p-px">
+          <Input color1="#1E1E1E" color2="#a075e6" className="rounded-xl p-px">
             <input
               type="password"
               placeholder="Password"

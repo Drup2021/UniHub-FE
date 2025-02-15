@@ -1,9 +1,4 @@
 import { ToastContainer } from "react-toastify";
-import AddQuestion from "../../components/AddQuestion/AddQuestion";
-// import MainQuestion from "./components/ViewQuestion/MainQuestion"
-// import AllQuestions from "./components/StackOverflow/AllQuestions"
-import StackOverflow from "@/components/StackOverflow";
-import ViewQuestion from "@/components/ViewQuestion/ViewQuestion";
 
 const Home = () => {
   return (
@@ -14,12 +9,9 @@ const Home = () => {
           autoClose={2000}
           className="md:w-fit"
         />
-
-        {/* <AddQuestion/> */}
-        {/* <MainQuestion/> */}
-        {/* <AllQuestions/> */}
-        {/* <StackOverflow/> */}
-        <ViewQuestion />
+        <div>
+          <div className="uppercase">Welcome to unihub</div>
+        </div>
       </div>
     </>
   );
