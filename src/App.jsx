@@ -23,6 +23,8 @@ import ChatBot from "./pages/Chatbot/Chatbot";
 import EventsGallery from "./components/Events/Events";
 import ViewQuestion from "./components/ViewQuestion/ViewQuestion";
 import FrontPage from "./pages/FrontPage/FrontPage";
+import MapSearch from "./components/Maps/Map";
+import HomePage from "./pages/HomePage/HomePage";
 
 const App = () => {
   const { scrollY } = useScroll();
@@ -55,7 +57,7 @@ const App = () => {
       <Navbar />
       <Routes>
         {isAuthenticated ? (
-          <Route index element={<div>Hello</div>}></Route>
+          <Route index element={<HomePage />}></Route>
         ) : (
           <Route index element={<FrontPage />}></Route>
         )}
@@ -78,6 +80,7 @@ const App = () => {
             <Route path="/chatbot" element={<ChatBot />}></Route>
             <Route path="/events" element={<EventsGallery />}></Route>
             <Route path="/question" element={<ViewQuestion />}></Route>
+            <Route path="/maps" element={<MapSearch />}></Route>
           </>
         )}
         <Route path="/loading" element={<Loading />}></Route>
