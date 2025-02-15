@@ -16,13 +16,13 @@ import ForgotPassword from "./pages/ForgotPassword/ForgotPassword";
 import DeleteAccount from "./pages/DeleteAccount/DeleteAccount";
 import ResetPassword from "./pages/ResetPassword/ResetPassword";
 import Loading from "./pages/Loading/Loading";
-import Home from "./pages/Home/Home";
 import Forum from "./pages/Forum/Forum";
 import Profile from "./pages/Profile/Profile";
 import AddQuestion from "./components/AddQuestion/AddQuestion";
 import ChatBot from "./pages/Chatbot/Chatbot";
 import EventsGallery from "./components/Events/Events";
 import ViewQuestion from "./components/ViewQuestion/ViewQuestion";
+import FrontPage from "./pages/FrontPage/FrontPage";
 
 const App = () => {
   const { scrollY } = useScroll();
@@ -54,7 +54,12 @@ const App = () => {
     <motion.div className="relative w-full">
       <Navbar />
       <Routes>
-        <Route index element={<Home />}></Route>
+        {isAuthenticated ? (
+          <Route index element={<div>Hello</div>}></Route>
+        ) : (
+          <Route index element={<FrontPage />}></Route>
+        )}
+
         <Route path="/login" element={<Login />}></Route>
         <Route path="/signup" element={<Signup />}></Route>
         <Route path="/forgotPassword" element={<ForgotPassword />}></Route>

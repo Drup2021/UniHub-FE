@@ -52,10 +52,13 @@ const ChatBot = () => {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gray-900 p-4">
-      <div className="w-full max-w-md bg-gray-800 rounded-lg p-6 shadow-[0_0_20px_rgba(255,255,255,0.5)]">
+    <div className=" w-full h-[100dvh]   bg-back md:px-[10dvh] md:pt-[10dvh] md:pb-[5dvh] ">
+      <div
+        className="w-full h-full
+       bg-border rounded-lg  pt-20 pb-10  md:p-8 flex flex-col justify-between"
+      >
         {/* Header with picture and chatbot name */}
-        <div className="mb-4 text-center">
+        <div className="w-full  mb-4 text-center">
           <img
             src="src/assets/mascot.jpeg"
             alt="Blake Logo"
@@ -64,7 +67,7 @@ const ChatBot = () => {
           <h1 className="text-4xl font-extrabold text-white mt-2">BLAKE</h1>
         </div>
         {/* Chat messages */}
-        <div className="h-80 overflow-y-auto mb-4 space-y-2">
+        <div className=" h-full overflow-y-auto mb-4 space-y-2">
           {messages.map((msg, index) => (
             <div
               key={index}
@@ -90,7 +93,7 @@ const ChatBot = () => {
             type="text"
             value={question}
             onChange={(e) => setQuestion(e.target.value)}
-            className="flex-1 bg-gray-700 border border-gray-600 rounded-l-lg p-2 text-white focus:outline-none"
+            className="flex-1 w-full bg-gray-700 border border-gray-600 rounded-l-lg p-2 text-white focus:outline-none"
             placeholder="Type your question..."
           />
           <button
