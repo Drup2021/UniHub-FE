@@ -50,7 +50,6 @@ const App = () => {
       <Navbar />
       <Routes>
         <Route index element={<Home />}></Route>
-        <Route path="/forum" element={<Forum />}></Route>
 
         {!user?.isVerified && (
           <Route path="/verifyEmail" element={<VerifyEmail />}></Route>
@@ -70,6 +69,7 @@ const App = () => {
               element={<ResetPassword />}
             ></Route>
             <Route path="/loading" element={<Loading />}></Route>
+            <Route path="/forum" element={<Forum />}></Route>
           </>
         )}
 

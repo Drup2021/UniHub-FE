@@ -12,9 +12,11 @@ import { Link } from "react-router";
 const Signup = () => {
   const [email, setEmail] = useState("");
   const [username, setUsername] = useState("");
+  const [role, setRole] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
+  const [college, setCollege] = useState("");
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const loading = useSelector((state) => state.auth.loading);
@@ -53,6 +55,13 @@ const Signup = () => {
     setUsername(e.target.value);
   };
 
+  const handleRoleChange = (e) => {
+    setRole(e.target.value);
+  };
+  const handleCollegeChange = (e) => {
+    setCollege(e.target.value);
+  };
+
   const handlePasswordChange = (e) => {
     const value = e.target.value;
     setPassword(value);
@@ -68,7 +77,14 @@ const Signup = () => {
   const handleSubmitSignup = async (e) => {
     e.preventDefault();
 
-    if (!email || !username || !password || !confirmPassword) {
+    if (
+      !email ||
+      !username ||
+      !password ||
+      !confirmPassword ||
+      !role ||
+      !college
+    ) {
       setErrorMessage("All fields are required.");
       return;
     }
@@ -79,7 +95,9 @@ const Signup = () => {
     }
 
     try {
-      const result = await dispatch(signup({ email, username, password }));
+      const result = await dispatch(
+        signup({ email, username, role, college, password })
+      );
       if (result.meta.requestStatus === "fulfilled") {
         toast.success(result.payload.message);
         setTimeout(() => navigate("/verifyEmail"), 2000);
@@ -114,7 +132,7 @@ const Signup = () => {
           className="flex flex-col w-[80dvw] gap-4 p-4 md:w-1/2"
           onSubmit={handleSubmitSignup}
         >
-          <Input color1="#282829" color2="#4CAF50" className="rounded-xl p-px">
+          <Input color1="#1E1E1E" color2="#a075e6" className="rounded-xl p-px">
             <input
               type="email"
               placeholder="Email"
@@ -124,7 +142,7 @@ const Signup = () => {
               autoComplete="off"
             />
           </Input>
-          <Input color1="#282829" color2="#4CAF50" className="rounded-xl p-px ">
+          <Input color1="#1E1E1E" color2="#a075e6" className="rounded-xl p-px ">
             <input
               type="text"
               placeholder="Username"
@@ -134,7 +152,41 @@ const Signup = () => {
               autoComplete="off"
             />
           </Input>
-          <Input color1="#282829" color2="#4CAF50" className="rounded-xl p-px">
+          <Input color1="#1E1E1E" color2="#a075e6" className="rounded-xl p-px ">
+            <select
+              type="text"
+              placeholder="role"
+              value={role}
+              onChange={handleRoleChange}
+              className="rounded-xl focus:outline-none h-12 text-txt px-4 bg-back w-full"
+              autoComplete="off"
+            >
+              <option value="" disabled>
+                Select role
+              </option>
+              <option value="student">Student </option>
+              <option value="coordinator">Event Coordinatior </option>
+              <option value="business">Business Individual </option>
+            </select>
+          </Input>
+          <Input color1="#1E1E1E" color2="#a075e6" className="rounded-xl p-px ">
+            <select
+              type="text"
+              placeholder="College"
+              value={college}
+              onChange={handleCollegeChange}
+              className="rounded-xl focus:outline-none h-12 text-txt px-4 bg-back w-full"
+              autoComplete="off"
+            >
+              <option value="" disabled>
+                Select College
+              </option>
+              <option value="na">NA - For business </option>
+              <option value="IIESTS">IIEST, Shibpur </option>
+              <option value="IITBBS">IIT BBS </option>
+            </select>
+          </Input>
+          <Input color1="#1E1E1E" color2="#a075e6" className="rounded-xl p-px">
             <input
               type="password"
               placeholder="Password"
@@ -144,7 +196,7 @@ const Signup = () => {
               autoComplete="off"
             />
           </Input>
-          <Input color1="#282829" color2="#4CAF50" className="rounded-xl p-px">
+          <Input color1="#1E1E1E" color2="#a075e6" className="rounded-xl p-px">
             <input
               type="password"
               placeholder="Confirm Password"
