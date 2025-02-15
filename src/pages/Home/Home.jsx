@@ -1,4 +1,5 @@
 import { ToastContainer } from "react-toastify";
+import Events from "../../components/Events/Events"
 
 const Home = () => {
   return (
@@ -11,6 +12,7 @@ const Home = () => {
         />
         <div>
           <div className="uppercase">Welcome to unihub</div>
+          {/* <Events/> */}
         </div>
       </div>
     </>
