@@ -25,6 +25,7 @@ import ViewQuestion from "./components/ViewQuestion/ViewQuestion";
 import FrontPage from "./pages/FrontPage/FrontPage";
 import MapSearch from "./components/Maps/Map";
 import HomePage from "./pages/HomePage/HomePage";
+import EventForm from "./components/Add_events/Add_events";
 
 const App = () => {
   const { scrollY } = useScroll();
@@ -81,6 +82,9 @@ const App = () => {
             <Route path="/events" element={<EventsGallery />}></Route>
             <Route path="/question" element={<ViewQuestion />}></Route>
             <Route path="/maps" element={<MapSearch />}></Route>
+            {user.role === "coordinator" && (
+              <Route path="/addEvent" element={<EventForm />}></Route>
+            )}
           </>
         )}
         <Route path="/loading" element={<Loading />}></Route>
