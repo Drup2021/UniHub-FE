@@ -8,7 +8,9 @@ const StackOverflow = () => {
   useEffect(() => {
     const getQuestion = async () => {
       try {
-        const res = await axios.get("http://localhost:3000/api/forum/question");
+        const res = await axios.get(
+          "https://unihub-be.onrender.com/api/forum/question"
+        );
         let questionsData = res.data;
         setQuestions(questionsData);
       } catch (err) {

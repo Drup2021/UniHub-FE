@@ -144,7 +144,7 @@ const HomePage = () => {
       </section>
 
       {/* Events Section */}
-      <section className="py-20 px-10 bg-gray-800">
+      {/* <section className="py-20 px-4 sm:px-10 bg-gray-800">
         <h2 className="text-3xl font-bold text-purple-400 mb-8 text-center">
           Upcoming Events
         </h2>
@@ -153,46 +153,55 @@ const HomePage = () => {
             className="flex transition-transform duration-500 h-full"
             style={{
               width: `${events.length * 100}%`,
-              transform: `translateX(-${currentEventIndex * 100}%)`,
+              transform: `translateX(-${
+                currentEventIndex * (100 / events.length)
+              }%)`,
             }}
           >
             {events.map((event) => (
               <div
                 key={event.id}
-                className="w-full flex-shrink-0 bg-gray-700 p-8 rounded-lg shadow-lg text-center"
+                className="w-full flex-shrink-0 bg-gray-700 p-6 sm:p-8 rounded-lg shadow-lg text-center"
               >
-                <div className="w-full h-full overflow-hidden rounded-lg ">
+                <div className="w-full h-[60%] overflow-hidden rounded-lg mb-6">
                   <img
                     src={imageMap[event.image]}
                     alt={event.title}
-                    className="w-full h-full object-contain"
+                    className="w-full h-full object-cover"
                   />
                 </div>
                 <h3 className="text-2xl font-bold mb-4">{event.title}</h3>
-                <p className="text-purple-300 flex items-center justify-center gap-2 ">
+                <p className="text-purple-300 flex items-center justify-center gap-2">
                   <Calendar /> {event.date}
                 </p>
-                <p className="text-lg mb-6">{event.description}</p>
-                <button className="px-6 py-2 text-lg font-bold text-white bg-gradient-to-r from-purple-500 to-pink-500 rounded-full">
+                <p className="text-lg mb-6 line-clamp-3">{event.description}</p>
+                <button className="px-6 py-2 text-lg font-bold text-white bg-gradient-to-r from-purple-500 to-pink-500 rounded-full hover:opacity-90 transition-opacity">
                   Learn More
                 </button>
               </div>
             ))}
           </div>
-          <button
-            onClick={goToPreviousEvent}
-            className="absolute top-1/2 left-4 transform -translate-y-1/2 z-10 bg-purple-400 bg-opacity-80 p-3 rounded-full text-white hover:scale-110 transition-transform"
-          >
-            <ArrowLeft />
-          </button>
-          <button
-            onClick={goToNextEvent}
-            className="absolute top-1/2 right-4 transform -translate-y-1/2 z-10 bg-purple-400 bg-opacity-80 p-3 rounded-full text-white hover:scale-110 transition-transform"
-          >
-            <ArrowRight />
-          </button>
+
+          {events.length > 1 && (
+            <>
+              <button
+                onClick={goToPreviousEvent}
+                aria-label="Previous event"
+                className="absolute top-1/2 left-4 transform -translate-y-1/2 z-10 bg-purple-400 bg-opacity-80 p-3 rounded-full text-white hover:scale-110 transition-transform"
+              >
+                <ArrowLeft />
+              </button>
+              <button
+                onClick={goToNextEvent}
+                aria-label="Next event"
+                className="absolute top-1/2 right-4 transform -translate-y-1/2 z-10 bg-purple-400 bg-opacity-80 p-3 rounded-full text-white hover:scale-110 transition-transform"
+              >
+                <ArrowRight />
+              </button>
+            </>
+          )}
         </div>
-      </section>
+      </section> */}
 
       {/* Testimonials Section */}
       <section className="py-20 px-10 bg-gray-800">
