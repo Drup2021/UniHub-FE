@@ -39,6 +39,9 @@ const HomePage = () => {
   const { events, forumPosts, testimonials, team } = data;
   const [currentEventIndex, setCurrentEventIndex] = useState(0);
 
+  // Define team names to override JSON values
+  const teamNames = ["Siddharth", "Drup", "Harsh", "Shruti", "Rishabh"];
+
   // Auto-slide events every 4 seconds
   useEffect(() => {
     const interval = setInterval(() => {
@@ -60,74 +63,6 @@ const HomePage = () => {
 
   return (
     <div className="bg-gray-900 text-white min-h-screen font-sans">
-      {/* Search Bar */}
-      <div
-        style={{
-          position: "absolute",
-          top: "10dvh",
-          left: "50%",
-          transform: "translateX(-50%)",
-          zIndex: 4,
-          background: "#A075e6",
-          padding: "8px",
-          borderRadius: "6px",
-          boxShadow: "0 2px 6px rgba(0, 0, 0, 0.1)",
-          display: "flex",
-          alignItems: "center",
-          gap: "8px",
-          maxWidth: "90%",
-        }}
-      >
-        <div style={{ position: "relative", flex: "0 0 150px" }}>
-          <input
-            type="text"
-            placeholder="From..."
-            value={data.from || ""}
-            onChange={(e) => {}}
-            style={{
-              padding: "6px 8px",
-              border: "1px solid #ddd",
-              backgroundColor: "#e3d5f8",
-              borderRadius: "4px",
-              width: "100%",
-              fontSize: "14px",
-            }}
-          />
-        </div>
-        <div style={{ position: "relative", flex: "0 0 150px" }}>
-          <input
-            type="text"
-            placeholder="To..."
-            value={data.to || ""}
-            onChange={(e) => {}}
-            style={{
-              padding: "6px 8px",
-              border: "1px solid #ddd",
-              backgroundColor: "#e3d5f8",
-              borderRadius: "4px",
-              width: "100%",
-              fontSize: "14px",
-            }}
-          />
-        </div>
-        <button
-          style={{
-            background: "#5b21b6",
-            color: "white",
-            border: "none",
-            padding: "6px 12px",
-            borderRadius: "4px",
-            cursor: "pointer",
-            transition: "background 0.3s",
-            flexShrink: 0,
-            fontSize: "14px",
-          }}
-          onClick={() => {}}
-        >
-          SEARCH
-        </button>
-      </div>
-
       {/* Header Section */}
       <header className="h-screen flex items-center justify-center text-center relative overflow-hidden bg-gradient-to-br from-gray-900 to-purple-900">
         <div className="relative z-10">
@@ -215,7 +150,7 @@ const HomePage = () => {
         </h2>
         <div className="relative overflow-hidden h-[500px] max-w-6xl mx-auto">
           <div
-            className="flex transition-transform duration-500"
+            className="flex transition-transform duration-500 h-full"
             style={{
               width: `${events.length * 100}%`,
               transform: `translateX(-${currentEventIndex * 100}%)`,
@@ -226,15 +161,15 @@ const HomePage = () => {
                 key={event.id}
                 className="w-full flex-shrink-0 bg-gray-700 p-8 rounded-lg shadow-lg text-center"
               >
-                <div className="w-full h-64 overflow-hidden rounded-lg mb-6">
+                <div className="w-full h-full overflow-hidden rounded-lg ">
                   <img
                     src={imageMap[event.image]}
                     alt={event.title}
-                    className="w-full h-full object-cover"
+                    className="w-full h-full object-contain"
                   />
                 </div>
                 <h3 className="text-2xl font-bold mb-4">{event.title}</h3>
-                <p className="text-purple-300 flex items-center justify-center gap-2 mb-4">
+                <p className="text-purple-300 flex items-center justify-center gap-2 ">
                   <Calendar /> {event.date}
                 </p>
                 <p className="text-lg mb-6">{event.description}</p>
@@ -246,13 +181,13 @@ const HomePage = () => {
           </div>
           <button
             onClick={goToPreviousEvent}
-            className="absolute top-1/2 left-4 transform -translate-y-1/2 bg-purple-400 bg-opacity-80 p-3 rounded-full text-white hover:scale-110 transition-transform"
+            className="absolute top-1/2 left-4 transform -translate-y-1/2 z-10 bg-purple-400 bg-opacity-80 p-3 rounded-full text-white hover:scale-110 transition-transform"
           >
             <ArrowLeft />
           </button>
           <button
             onClick={goToNextEvent}
-            className="absolute top-1/2 right-4 transform -translate-y-1/2 bg-purple-400 bg-opacity-80 p-3 rounded-full text-white hover:scale-110 transition-transform"
+            className="absolute top-1/2 right-4 transform -translate-y-1/2 z-10 bg-purple-400 bg-opacity-80 p-3 rounded-full text-white hover:scale-110 transition-transform"
           >
             <ArrowRight />
           </button>
@@ -296,11 +231,11 @@ const HomePage = () => {
               <div className="w-32 h-32 rounded-full border-4 border-purple-400 overflow-hidden mx-auto mb-6">
                 <img
                   src={Team[index]}
-                  alt={member.name}
+                  alt={teamNames[index]}
                   className="w-full h-full object-cover"
                 />
               </div>
-              <h3 className="text-2xl font-bold mb-2">{member.name}</h3>
+              <h3 className="text-2xl font-bold mb-2">{teamNames[index]}</h3>
               <p className="text-purple-300 mb-6">{member.role}</p>
               <button className="px-6 py-2 text-lg font-bold text-white bg-gradient-to-r from-purple-500 to-pink-500 rounded-full">
                 Contact
