@@ -24,7 +24,7 @@ const SlideTabs = () => {
   const buttonRef = useRef(null);
 
   const { scrollDirection } = useSelector((state) => state.scrollDirection);
-  const { isAuthenticated } = useSelector((state) => state.auth);
+  const { isAuthenticated, user } = useSelector((state) => state.auth);
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -84,6 +84,12 @@ const SlideTabs = () => {
                     <Tab to="/maps" setPosition={setPosition}>
                       Maps
                     </Tab>
+
+                    {user.role === "coordinator" && (
+                      <Tab to="/addEvent" setPosition={setPosition}>
+                        Add Event
+                      </Tab>
+                    )}
                   </>
                 )}
 
