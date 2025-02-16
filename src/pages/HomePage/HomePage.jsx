@@ -1,28 +1,39 @@
-import React, { useState, useEffect } from 'react';
-import data from './data.json';
-import { FaArrowLeft, FaArrowRight, FaComments, FaCalendarAlt, FaUser, FaStar, FaEnvelope } from 'react-icons/fa';
+/* eslint-disable no-unused-vars */
+import { useState, useEffect } from "react";
+import data from "./data.json";
+import {
+  ArrowLeft,
+  ArrowRight,
+  MessageSquare,
+  Calendar,
+  User,
+  Star,
+  Mail,
+} from "lucide-react";
 
-// Import images
-import event1 from '../assets/event-1.jpg';
-import event2 from '../assets/event-2.jpg';
-import event3 from '../assets/event-3.jpg';
-import teamMember1 from '../assets/team-member-1.jpeg';
-import teamMember2 from '../assets/team-member-2.jpeg';
-import teamMember3 from '../assets/team-member-3.jpeg';
-import teamMember4 from '../assets/team-member-4.jpeg';
-import teamMember5 from '../assets/team-member-5.jpeg';
+// Import images for events
+import event1 from "../../assets/event-1.jpg";
+import event2 from "../../assets/event-2.jpg";
+import event3 from "../../assets/event-3.jpg";
 
-// Map image names to imported images
+// Import images for team members
+import teamMember1 from "../../assets/team-member-1.webp";
+import teamMember2 from "../../assets/team-member-2.webp";
+import teamMember3 from "../../assets/team-member-3.webp";
+import teamMember4 from "../../assets/team-member-4.webp";
+import teamMember5 from "../../assets/team-member-5.webp";
+
+import mascot from "../../assets/mascot.jpg";
+
+// Map image names to imported event images
 const imageMap = {
-  'event-1.jpg': event1,
-  'event-2.jpg': event2,
-  'event-3.jpg': event3,
-  'team-member-1.jpg': teamMember1,
-  'team-member-2.jpg': teamMember2,
-  'team-member-3.jpg': teamMember3,
-  'team-member-4.jpg': teamMember4,
-  'team-member-5.jpg': teamMember5,
+  "event-1.jpg": event1,
+  "event-2.jpg": event2,
+  "event-3.jpg": event3,
 };
+
+// Array of team member images
+const Team = [teamMember1, teamMember2, teamMember3, teamMember4, teamMember5];
 
 const HomePage = () => {
   const { events, forumPosts, testimonials, team } = data;
@@ -32,7 +43,7 @@ const HomePage = () => {
   useEffect(() => {
     const interval = setInterval(() => {
       setCurrentEventIndex((prevIndex) => (prevIndex + 1) % events.length);
-    }, 4000); // 4 seconds
+    }, 4000);
     return () => clearInterval(interval);
   }, [events.length]);
 
@@ -49,6 +60,74 @@ const HomePage = () => {
 
   return (
     <div className="bg-gray-900 text-white min-h-screen font-sans">
+      {/* Search Bar */}
+      <div
+        style={{
+          position: "absolute",
+          top: "10dvh",
+          left: "50%",
+          transform: "translateX(-50%)",
+          zIndex: 4,
+          background: "#A075e6",
+          padding: "8px",
+          borderRadius: "6px",
+          boxShadow: "0 2px 6px rgba(0, 0, 0, 0.1)",
+          display: "flex",
+          alignItems: "center",
+          gap: "8px",
+          maxWidth: "90%",
+        }}
+      >
+        <div style={{ position: "relative", flex: "0 0 150px" }}>
+          <input
+            type="text"
+            placeholder="From..."
+            value={data.from || ""}
+            onChange={(e) => {}}
+            style={{
+              padding: "6px 8px",
+              border: "1px solid #ddd",
+              backgroundColor: "#e3d5f8",
+              borderRadius: "4px",
+              width: "100%",
+              fontSize: "14px",
+            }}
+          />
+        </div>
+        <div style={{ position: "relative", flex: "0 0 150px" }}>
+          <input
+            type="text"
+            placeholder="To..."
+            value={data.to || ""}
+            onChange={(e) => {}}
+            style={{
+              padding: "6px 8px",
+              border: "1px solid #ddd",
+              backgroundColor: "#e3d5f8",
+              borderRadius: "4px",
+              width: "100%",
+              fontSize: "14px",
+            }}
+          />
+        </div>
+        <button
+          style={{
+            background: "#5b21b6",
+            color: "white",
+            border: "none",
+            padding: "6px 12px",
+            borderRadius: "4px",
+            cursor: "pointer",
+            transition: "background 0.3s",
+            flexShrink: 0,
+            fontSize: "14px",
+          }}
+          onClick={() => {}}
+        >
+          SEARCH
+        </button>
+      </div>
+
       {/* Header Section */}
       <header className="h-screen flex items-center justify-center text-center relative overflow-hidden bg-gradient-to-br from-gray-900 to-purple-900">
         <div className="relative z-10">
@@ -58,7 +137,9 @@ const HomePage = () => {
           <p className="text-2xl text-purple-300 mb-3">
             A one-stop solution to all student problems
           </p>
-          <p className="text-xl text-white mb-8">Built By Students For Students</p>
+          <p className="text-xl text-white mb-8">
+            Built By Students For Students
+          </p>
           <button className="px-8 py-3 text-lg font-bold text-white bg-gradient-to-r from-purple-500 to-pink-500 rounded-full shadow-lg hover:scale-105 transition-transform">
             Register
           </button>
@@ -85,7 +166,7 @@ const HomePage = () => {
       <section className="py-20 px-10 bg-gray-800">
         <div className="flex items-center gap-8 max-w-6xl mx-auto">
           <img
-            src="https://via.placeholder.com/150" // Placeholder image
+            src={mascot}
             alt="Chatbot"
             className="w-40 h-40 rounded-full border-4 border-purple-400 object-cover"
           />
@@ -97,7 +178,7 @@ const HomePage = () => {
               Meet Blake, your AI study buddy. Ask me anything!
             </p>
             <button className="px-6 py-2 text-lg font-bold text-white bg-gradient-to-r from-purple-500 to-pink-500 rounded-full flex items-center gap-2 hover:scale-105 transition-transform">
-              <FaComments /> Chat Now
+              <MessageSquare /> Chat Now
             </button>
           </div>
         </div>
@@ -116,7 +197,7 @@ const HomePage = () => {
             >
               <h3 className="text-2xl font-bold mb-4">{post.title}</h3>
               <p className="text-purple-300 flex items-center gap-2 mb-4">
-                <FaUser /> By {post.author}
+                <User /> By {post.author}
               </p>
               <p className="text-lg mb-6">{post.content}</p>
               <button className="px-6 py-2 text-lg font-bold text-white bg-gradient-to-r from-purple-500 to-pink-500 rounded-full">
@@ -154,7 +235,7 @@ const HomePage = () => {
                 </div>
                 <h3 className="text-2xl font-bold mb-4">{event.title}</h3>
                 <p className="text-purple-300 flex items-center justify-center gap-2 mb-4">
-                  <FaCalendarAlt /> {event.date}
+                  <Calendar /> {event.date}
                 </p>
                 <p className="text-lg mb-6">{event.description}</p>
                 <button className="px-6 py-2 text-lg font-bold text-white bg-gradient-to-r from-purple-500 to-pink-500 rounded-full">
@@ -167,13 +248,13 @@ const HomePage = () => {
             onClick={goToPreviousEvent}
             className="absolute top-1/2 left-4 transform -translate-y-1/2 bg-purple-400 bg-opacity-80 p-3 rounded-full text-white hover:scale-110 transition-transform"
           >
-            <FaArrowLeft />
+            <ArrowLeft />
           </button>
           <button
             onClick={goToNextEvent}
             className="absolute top-1/2 right-4 transform -translate-y-1/2 bg-purple-400 bg-opacity-80 p-3 rounded-full text-white hover:scale-110 transition-transform"
           >
-            <FaArrowRight />
+            <ArrowRight />
           </button>
         </div>
       </section>
@@ -191,7 +272,7 @@ const HomePage = () => {
             >
               <p className="text-lg italic mb-6">"{testimonial.comment}"</p>
               <p className="text-purple-300 flex items-center justify-center gap-2">
-                <FaStar /> - {testimonial.name}
+                <Star /> - {testimonial.name}
               </p>
               <button className="px-6 py-2 mt-6 text-lg font-bold text-white bg-gradient-to-r from-purple-500 to-pink-500 rounded-full">
                 View Profile
@@ -207,14 +288,14 @@ const HomePage = () => {
           Meet Our Team
         </h2>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 max-w-6xl mx-auto">
-          {team.map((member) => (
+          {team.map((member, index) => (
             <div
               key={member.id}
               className="bg-gray-700 p-6 rounded-lg shadow-lg text-center hover:scale-105 transition-transform"
             >
               <div className="w-32 h-32 rounded-full border-4 border-purple-400 overflow-hidden mx-auto mb-6">
                 <img
-                  src={imageMap[member.image]}
+                  src={Team[index]}
                   alt={member.name}
                   className="w-full h-full object-cover"
                 />
@@ -233,12 +314,12 @@ const HomePage = () => {
       <footer className="py-20 px-10 bg-gray-800 text-center">
         <h2 className="text-3xl font-bold text-purple-400 mb-4">Contact Us</h2>
         <p className="text-lg">
-          Have questions or feedback? Reach out to us at{' '}
+          Have questions or feedback? Reach out to us at{" "}
           <a
             href="mailto:info@example.com"
             className="text-purple-300 hover:underline"
           >
-            <FaEnvelope className="inline" /> info@example.com
+            <Mail className="inline" /> info@example.com
           </a>
           . We'd love to hear from you!
         </p>
@@ -247,4 +328,4 @@ const HomePage = () => {
   );
 };
 
-export default HomePage; 
+export default HomePage;
