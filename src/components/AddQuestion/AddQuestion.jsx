@@ -80,9 +80,13 @@ const AddQuestion = () => {
     const formData = { user, title, body, tag };
 
     try {
-      await axios.post("http://localhost:3000/api/forum/question", formData, {
-        headers: { "Content-Type": "application/json" },
-      });
+      await axios.post(
+        "https://unihub-be.onrender.com/api/forum/question",
+        formData,
+        {
+          headers: { "Content-Type": "application/json" },
+        }
+      );
       toast.success("Question added successfully!");
 
       // Clear form inputs
