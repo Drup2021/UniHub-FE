@@ -55,6 +55,10 @@ const Login = () => {
         setEmail("");
         setPassword("");
         const { user } = result.payload;
+        if (user.role === "business") {
+          window.location.href = "https://event-page-1ppx.onrender.com";
+          console.log("hello");
+        }
         if (!user.isVerified) {
           dispatch(sendVerificationToken({ email }));
           toast.info("Verify your email to continue!");

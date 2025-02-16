@@ -70,7 +70,7 @@ function MainQuestion() {
     async function getFunctionDetails() {
       try {
         const res = await axios.get(
-          `http://localhost:3000/api/forum/question/${id}`
+          `https://unihub-be.onrender.com/api/forum/question/${id}`
         );
         // If the API returns an array, use its first element; otherwise, use the object.
         const question = Array.isArray(res.data) ? res.data[0] : res.data;
@@ -89,7 +89,7 @@ function MainQuestion() {
   async function getUpdatedAnswer() {
     try {
       const res = await axios.get(
-        `http://localhost:3000/api/forum/question/${id}`
+        `https://unihub-be.onrender.com/api/forum/question/${id}`
       );
       const question = Array.isArray(res.data) ? res.data[0] : res.data;
       setQuestionData(question);
@@ -105,7 +105,11 @@ function MainQuestion() {
     const config = { headers: { "Content-Type": "application/json" } };
 
     try {
-      await axios.post("http://localhost:3000/api/forum/answer", body, config);
+      await axios.post(
+        "https://unihub-be.onrender.com/api/forum/answer",
+        body,
+        config
+      );
       alert("Answer added successfully");
       setAnswer("");
       getUpdatedAnswer();
@@ -120,7 +124,10 @@ function MainQuestion() {
     if (comment.trim()) {
       const body = { question_id: id, comment, user };
       try {
-        await axios.post(`http://localhost:3000/api/forum/comment/${id}`, body);
+        await axios.post(
+          `https://unihub-be.onrender.com/api/forum/comment/${id}`,
+          body
+        );
         setComment("");
         setShow(false);
         getUpdatedAnswer();
