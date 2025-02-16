@@ -39,6 +39,49 @@ const HomePage = () => {
   const { events, forumPosts, testimonials, team } = data;
   const [currentEventIndex, setCurrentEventIndex] = useState(0);
 
+  // Extend forum posts with additional dummy posts
+  const dummyForumPosts = [
+    ...forumPosts,
+    {
+      id: "dummy1",
+      title: "Dummy Post 1",
+      author: "John Doe",
+      content: "This is a dummy forum post to show additional content.",
+    },
+    {
+      id: "dummy2",
+      title: "Dummy Post 2",
+      author: "Jane Doe",
+      content: "Another dummy forum post example with some placeholder text.",
+    },
+    {
+      id: "dummy3",
+      title: "Dummy Post 3",
+      author: "Alex Smith",
+      content: "A third dummy post to demonstrate multiple posts.",
+    },
+  ];
+
+  // Extend testimonials with additional dummy testimonials
+  const dummyTestimonials = [
+    ...testimonials,
+    {
+      id: "dummy1",
+      comment: "This is an amazing platform!",
+      name: "Alice Johnson",
+    },
+    {
+      id: "dummy2",
+      comment: "I love the community feel here.",
+      name: "Bob Brown",
+    },
+    {
+      id: "dummy3",
+      comment: "It really solves a lot of student issues!",
+      name: "Charlie Davis",
+    },
+  ];
+
   // Define team names to override JSON values
   const teamNames = ["Siddharth", "Drup", "Harsh", "Shruti", "Rishabh"];
 
@@ -64,9 +107,9 @@ const HomePage = () => {
   return (
     <div className="bg-gray-900 text-white min-h-screen font-sans">
       {/* Header Section */}
-      <header className="h-screen flex items-center justify-center text-center relative overflow-hidden bg-gradient-to-br from-gray-900 to-purple-900">
+      <header className="h-[70vh] flex items-center justify-center text-center relative overflow-hidden bg-gradient-to-br from-gray-900 to-purple-900">
         <div className="relative z-10">
-          <h1 className="text-6xl font-bold mb-5 bg-gradient-to-r from-purple-400 to-pink-500 bg-clip-text text-transparent">
+          <h1 className="text-8xl font-bold mb-5 text-fuchsia-300 drop-shadow-lg">
             Welcome to UniHub
           </h1>
           <p className="text-2xl text-purple-300 mb-3">
@@ -75,7 +118,7 @@ const HomePage = () => {
           <p className="text-xl text-white mb-8">
             Built By Students For Students
           </p>
-          <button className="px-8 py-3 text-lg font-bold text-white bg-gradient-to-r from-purple-500 to-pink-500 rounded-full shadow-lg hover:scale-105 transition-transform">
+          <button className="px-8 py-3 text-lg font-bold text-white bg-gradient-to-r from-purple-700 to-purple-900 rounded-full shadow-lg hover:scale-105 transition-transform">
             Register
           </button>
         </div>
@@ -84,7 +127,7 @@ const HomePage = () => {
           {[...Array(10)].map((_, i) => (
             <div
               key={i}
-              className="absolute rounded-full bg-purple-400 opacity-10"
+              className="absolute rounded-full bg-purple-700 opacity-10"
               style={{
                 width: `${20 + i * 5}px`,
                 height: `${20 + i * 5}px`,
@@ -103,7 +146,7 @@ const HomePage = () => {
           <img
             src={mascot}
             alt="Chatbot"
-            className="w-40 h-40 rounded-full border-4 border-purple-400 object-cover"
+            className="w-40 h-40 rounded-full border-4 border-purple-700 object-cover"
           />
           <div>
             <h2 className="text-3xl font-bold text-purple-400 mb-4">
@@ -112,7 +155,7 @@ const HomePage = () => {
             <p className="text-lg mb-6">
               Meet Blake, your AI study buddy. Ask me anything!
             </p>
-            <button className="px-6 py-2 text-lg font-bold text-white bg-gradient-to-r from-purple-500 to-pink-500 rounded-full flex items-center gap-2 hover:scale-105 transition-transform">
+            <button className="px-6 py-2 text-lg font-bold text-white bg-gradient-to-r from-purple-700 to-purple-900 rounded-full flex items-center gap-2 hover:scale-105 transition-transform">
               <MessageSquare /> Chat Now
             </button>
           </div>
@@ -125,7 +168,7 @@ const HomePage = () => {
           Latest Forum Posts
         </h2>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-6xl mx-auto">
-          {forumPosts.map((post) => (
+          {dummyForumPosts.map((post) => (
             <div
               key={post.id}
               className="bg-gray-700 p-6 rounded-lg shadow-lg hover:scale-105 transition-transform"
@@ -135,7 +178,7 @@ const HomePage = () => {
                 <User /> By {post.author}
               </p>
               <p className="text-lg mb-6">{post.content}</p>
-              <button className="px-6 py-2 text-lg font-bold text-white bg-gradient-to-r from-purple-500 to-pink-500 rounded-full">
+              <button className="px-6 py-2 text-lg font-bold text-white bg-gradient-to-r from-purple-700 to-purple-900 rounded-full">
                 Read More
               </button>
             </div>
@@ -143,82 +186,24 @@ const HomePage = () => {
         </div>
       </section>
 
-      {/* Events Section */}
-      {/* <section className="py-20 px-4 sm:px-10 bg-gray-800">
-        <h2 className="text-3xl font-bold text-purple-400 mb-8 text-center">
-          Upcoming Events
-        </h2>
-        <div className="relative overflow-hidden h-[500px] max-w-6xl mx-auto">
-          <div
-            className="flex transition-transform duration-500 h-full"
-            style={{
-              width: `${events.length * 100}%`,
-              transform: `translateX(-${
-                currentEventIndex * (100 / events.length)
-              }%)`,
-            }}
-          >
-            {events.map((event) => (
-              <div
-                key={event.id}
-                className="w-full flex-shrink-0 bg-gray-700 p-6 sm:p-8 rounded-lg shadow-lg text-center"
-              >
-                <div className="w-full h-[60%] overflow-hidden rounded-lg mb-6">
-                  <img
-                    src={imageMap[event.image]}
-                    alt={event.title}
-                    className="w-full h-full object-cover"
-                  />
-                </div>
-                <h3 className="text-2xl font-bold mb-4">{event.title}</h3>
-                <p className="text-purple-300 flex items-center justify-center gap-2">
-                  <Calendar /> {event.date}
-                </p>
-                <p className="text-lg mb-6 line-clamp-3">{event.description}</p>
-                <button className="px-6 py-2 text-lg font-bold text-white bg-gradient-to-r from-purple-500 to-pink-500 rounded-full hover:opacity-90 transition-opacity">
-                  Learn More
-                </button>
-              </div>
-            ))}
-          </div>
-
-          {events.length > 1 && (
-            <>
-              <button
-                onClick={goToPreviousEvent}
-                aria-label="Previous event"
-                className="absolute top-1/2 left-4 transform -translate-y-1/2 z-10 bg-purple-400 bg-opacity-80 p-3 rounded-full text-white hover:scale-110 transition-transform"
-              >
-                <ArrowLeft />
-              </button>
-              <button
-                onClick={goToNextEvent}
-                aria-label="Next event"
-                className="absolute top-1/2 right-4 transform -translate-y-1/2 z-10 bg-purple-400 bg-opacity-80 p-3 rounded-full text-white hover:scale-110 transition-transform"
-              >
-                <ArrowRight />
-              </button>
-            </>
-          )}
-        </div>
-      </section> */}
-
       {/* Testimonials Section */}
       <section className="py-20 px-10 bg-gray-800">
         <h2 className="text-3xl font-bold text-purple-400 mb-8 text-center">
-          What Our Members Say
+          What Our Students Say
         </h2>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-6xl mx-auto">
-          {testimonials.map((testimonial) => (
+          {dummyTestimonials.map((testimonial) => (
             <div
               key={testimonial.id}
               className="bg-gray-700 p-6 rounded-lg shadow-lg text-center hover:scale-105 transition-transform"
             >
-              <p className="text-lg italic mb-6">"{testimonial.comment}"</p>
+              <p className="text-lg italic mb-6">
+                "{testimonial.comment}"
+              </p>
               <p className="text-purple-300 flex items-center justify-center gap-2">
                 <Star /> - {testimonial.name}
               </p>
-              <button className="px-6 py-2 mt-6 text-lg font-bold text-white bg-gradient-to-r from-purple-500 to-pink-500 rounded-full">
+              <button className="px-6 py-2 mt-6 text-lg font-bold text-white bg-gradient-to-r from-purple-700 to-purple-900 rounded-full">
                 View Profile
               </button>
             </div>
@@ -237,16 +222,18 @@ const HomePage = () => {
               key={member.id}
               className="bg-gray-700 p-6 rounded-lg shadow-lg text-center hover:scale-105 transition-transform"
             >
-              <div className="w-32 h-32 rounded-full border-4 border-purple-400 overflow-hidden mx-auto mb-6">
+              <div className="w-32 h-32 rounded-full border-4 border-purple-700 overflow-hidden mx-auto mb-6">
                 <img
                   src={Team[index]}
                   alt={teamNames[index]}
                   className="w-full h-full object-cover"
                 />
               </div>
-              <h3 className="text-2xl font-bold mb-2">{teamNames[index]}</h3>
+              <h3 className="text-2xl font-bold mb-2">
+                {teamNames[index]}
+              </h3>
               <p className="text-purple-300 mb-6">{member.role}</p>
-              <button className="px-6 py-2 text-lg font-bold text-white bg-gradient-to-r from-purple-500 to-pink-500 rounded-full">
+              <button className="px-6 py-2 text-lg font-bold text-white bg-gradient-to-r from-purple-700 to-purple-900 rounded-full">
                 Contact
               </button>
             </div>

@@ -6,6 +6,20 @@ import metallum from "@/assets/metallum.jpg";
 import revelation from "@/assets/revelation.jpg";
 import wolfame from "@/assets/wolfame2.jpg";
 
+// Random image URLs from Picsum
+const randomImages = [
+  "https://picsum.photos/400/300?random=1",
+  "https://picsum.photos/400/300?random=2",
+  "https://picsum.photos/400/300?random=3",
+  "https://picsum.photos/400/300?random=4",
+  "https://picsum.photos/400/300?random=5",
+  "https://picsum.photos/400/300?random=6",
+  "https://picsum.photos/400/300?random=7",
+  "https://picsum.photos/400/300?random=8",
+  "https://picsum.photos/400/300?random=9",
+  "https://picsum.photos/400/300?random=10",
+];
+
 const eventsData = [
   {
     id: 1,
@@ -30,6 +44,63 @@ const eventsData = [
     desc: "Wolfame is the annual sports and cultural fest of Wolfenden Hall, IIEST Shibpur",
     date: "2025-03-17 to 2025-03-19",
     url: "https://wolfame.in/",
+  },
+  // Add more events with random images
+  {
+    id: 4,
+    img: randomImages[0],
+    title: "Tech Expo 2025",
+    desc: "A showcase of the latest technological innovations and advancements.",
+    date: "2025-04-10 to 2025-04-12",
+    url: "https://example.com/tech-expo",
+  },
+  {
+    id: 5,
+    img: randomImages[1],
+    title: "Cultural Fest 2025",
+    desc: "Celebrate diversity with music, dance, and art from around the world.",
+    date: "2025-05-05 to 2025-05-07",
+    url: "https://example.com/cultural-fest",
+  },
+  {
+    id: 6,
+    img: randomImages[2],
+    title: "Startup Summit",
+    desc: "A platform for budding entrepreneurs to pitch their ideas and network.",
+    date: "2025-06-15 to 2025-06-17",
+    url: "https://example.com/startup-summit",
+  },
+  {
+    id: 7,
+    img: randomImages[3],
+    title: "Hackathon 2025",
+    desc: "A 48-hour coding marathon to solve real-world problems.",
+    date: "2025-07-20 to 2025-07-22",
+    url: "https://example.com/hackathon",
+  },
+  {
+    id: 8,
+    img: randomImages[4],
+    title: "Art & Design Fair",
+    desc: "Explore the world of art and design with exhibitions and workshops.",
+    date: "2025-08-10 to 2025-08-12",
+    url: "https://example.com/art-design-fair",
+  },
+  {
+    id: 9,
+    img: randomImages[5],
+    title: "Music Festival",
+    desc: "A three-day celebration of music with performances by top artists.",
+    date: "2025-09-01 to 2025-09-03",
+    url: "https://example.com/music-festival",
+  },
+  {
+    id: 10,
+    img: randomImages[6],
+    title: "Science Fair",
+    desc: "Discover groundbreaking scientific research and innovations.",
+    date: "2025-10-15 to 2025-10-17",
+    url: "https://example.com/science-fair",
   },
 ];
 
@@ -68,7 +139,7 @@ const EventCard = ({ event }) => (
     </div>
     <div className="absolute inset-0 flex items-end justify-center bg-back/90 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
       <div className="flex space-x-2 pb-4 w-full px-4 justify-center">
-        <a href={`/contact/${event.title}&${event.date}`}>
+        <a>
           <button className="px-4 py-2 bg-back rounded-full text-pri hover:bg-bord transition-colors duration-300 uppercase font-bold text-sm tracking-wide border-2 border-bord">
             Register
           </button>
