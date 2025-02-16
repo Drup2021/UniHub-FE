@@ -1,5 +1,5 @@
 import { ToastContainer } from "react-toastify";
-import Map from "../../components/Add_events/Add_events.jsx"
+import Map from "../../components/Show_event/ShowEvent.jsx"
 
 const Home = () => {
   return (
