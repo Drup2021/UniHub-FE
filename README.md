@@ -15,5 +15,5 @@ Social Impact:
 - A RAG chatbot for readily available content like PYQs and notes so that students can learn angst-free.[Please feel free to explore our chatbot and events page]
 
 Business Impact: 
-- Businesses can run students focused campaigns easily and also sponsor all ongoing and upcoming events through the app itself.
+- Businesses can run students focused campaigns easily and also sponsor all ongoing and upcoming events of any college through the app itself.
 
