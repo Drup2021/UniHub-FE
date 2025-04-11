@@ -15,7 +15,7 @@ const ChatBot = () => {
 
     try {
       console.log("Sending request with body:", { query: question });
-      const response = await fetch("/ask", {
+      const response = await fetch("https://blakebot-1.onrender.com/ask", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ query: question }),
@@ -60,7 +60,7 @@ const ChatBot = () => {
         {/* Header with picture and chatbot name */}
         <div className="w-full  mb-4 text-center">
           <img
-            src="src/assets/mascot.jpeg"
+            src="src/assets/mascot.jpg"
             alt="Blake Logo"
             className="w-24 h-24 mx-auto rounded-full"
           />
